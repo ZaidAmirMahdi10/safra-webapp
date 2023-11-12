@@ -6,6 +6,7 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation';
+import CarInsurance from './components/CarInsurance';
 import Logout from './components/Logout';
 import { ProvideAuth } from './hooks/useAuth';
 
@@ -24,6 +25,7 @@ function App() {
             path="/dashboard" 
             element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
           />
+          <Route path="/car-insurane" element={<CarInsurance />} />
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>
       </ProvideAuth>

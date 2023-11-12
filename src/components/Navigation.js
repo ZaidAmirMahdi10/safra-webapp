@@ -23,6 +23,9 @@ const Navigation = () => {
           <Button color="inherit" component={Link} to="/dashboard">
             Dashboard
           </Button>
+          <Button color="inherit" component={Link} to="/car-insurane">
+            Car insurane
+          </Button>
           <Button color="inherit" component={Link} to="/logout">
             Logout
           </Button>
