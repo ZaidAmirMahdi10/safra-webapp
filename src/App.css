@@ -1,3 +1,11 @@
+button {
+  background-color: #210340 !important;
+}
+
+#root {
+  /* padding-bottom: 20px; */
+}
+
 .App {
   text-align: center;
 }
@@ -24,6 +32,10 @@
   color: white;
 }
 
+.divider {
+  border-bottom: 1px solid lightgray;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -35,4 +47,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.body-content {
+  padding: 40px 0;
 }
