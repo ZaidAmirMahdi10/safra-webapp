@@ -10,19 +10,23 @@ import {
   FormControl,
   TextareaAutosize,
 } from "@mui/material";
+import axios from "axios";
 
 const Safra = () => {
-  const [safraName, setSafraName] = useState("");
+  const [safraName, setSafraName] = useState("New Safra 1");
   const [safraType, setSafraType] = useState("");
+  const [safraDescription, setSafraDescription] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
-  const [safraPrice, setSafraPrice] = useState("");
+  const [safraPrice, setSafraPrice] = useState("500");
   const [safraProgramme, setSafraProgramme] = useState("");
   const [offer, setOffer] = useState("");
 
   const safraTypes = ["Tourism", "Studying", "Therapeutic", "Religious"];
+
+  console.log(safraDescription);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,8 +34,9 @@ const Safra = () => {
     const formData = {
       safraName,
       safraType,
-      dateFrom,
-      dateTo,
+      safraDescription,
+      dateFrom: new Date(dateFrom),
+      dateTo: new Date(dateTo),
       timeStart,
       timeEnd,
       safraPrice,
@@ -39,33 +44,32 @@ const Safra = () => {
       offer,
     };
 
+    console.log(new Date(dateFrom).getFullYear());
+
     try {
-      const response = await fetch('/api/safra', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const response = await axios.post("http://localhost:3001/createTrip", {
+        ...formData,
       });
 
       if (response.ok) {
-        console.log('Safra submitted successfully');
+        console.log("Safra submitted successfully");
         // Reset form fields after successful submission
-        setSafraName('');
-        setSafraType('');
-        setDateFrom('');
-        setDateTo('');
-        setTimeStart('');
-        setTimeEnd('');
-        setSafraPrice('');
-        setSafraProgramme('');
-        setOffer('');
+        setSafraName("");
+        setSafraType("");
+        setSafraDescription("");
+        setDateFrom("");
+        setDateTo("");
+        setTimeStart("");
+        setTimeEnd("");
+        setSafraPrice("");
+        setSafraProgramme("");
+        setOffer("");
       } else {
-        console.error('Failed to submit Safra');
+        console.error("Failed to submit Safra");
         // Handle error scenario
       }
     } catch (error) {
-      console.error('Error submitting Safra:', error);
+      console.error("Error submitting Safra:", error);
       // Handle error scenario
     }
   };
@@ -101,6 +105,17 @@ const Safra = () => {
                   </MenuItem>
                 ))}
               </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <label htmlFor="safraDescription">Safra Description</label>
+              <TextareaAutosize
+                placeholder="Safra Description"
+                id="safraDescription"
+                minRows={3}
+                fullWidth
+                value={safraDescription}
+                onChange={(e) => setSafraDescription(e.target.value)}
+              />
             </FormControl>
             <FormControl fullWidth margin="normal">
               <label htmlFor="dateFrom">Date From</label>

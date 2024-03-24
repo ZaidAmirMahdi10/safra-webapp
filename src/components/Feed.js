@@ -1,6 +1,8 @@
 // Feed.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Feed.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const getRandomImage = () => {
   const images = [
@@ -33,134 +35,149 @@ const getRandomImage = () => {
 };
 
 const Feed = () => {
-  const trips = [
-    {
-      type: "Tourism",
-      title: "Discover the Wonders of Tokyo",
-      description:
-        "Experience the blend of traditional and modern in Japan's bustling capital.",
-    },
-    {
-      type: "Therapeutic",
-      title: "Wellness Retreat in the Maldives",
-      description:
-        "Recharge your mind and body surrounded by crystal-clear waters and white sandy beaches.",
-    },
-    {
-      type: "Religious",
-      title: "Sacred Pilgrimage to Mecca",
-      description:
-        "Embark on a spiritual journey to the holiest city in Islam.",
-    },
-    {
-      type: "Studying",
-      title: "Art and History Exploration in Florence",
-      description:
-        "Immerse yourself in the Renaissance art and architecture of Florence, Italy.",
-    },
-    {
-      type: "Tourism",
-      title: "Adventurous Safari in Serengeti National Park",
-      description:
-        "Witness the incredible wildlife of Africa on a thrilling safari adventure.",
-    },
-    {
-      type: "Therapeutic",
-      title: "Yoga Retreat in the Himalayas",
-      description:
-        "Find peace and tranquility surrounded by the majestic mountains of the Himalayas.",
-    },
-    {
-      type: "Religious",
-      title: "Cultural Experience in Varanasi",
-      description:
-        "Explore the spiritual and cultural richness of the holy city of Varanasi, India.",
-    },
-    {
-      type: "Studying",
-      title: "Archaeological Expedition to Athens",
-      description:
-        "Delve into the ancient history of Greece with a study tour in Athens.",
-    },
-    {
-      type: "Tourism",
-      title: "Scenic Road Trip along the Amalfi Coast",
-      description:
-        "Drive along the stunning Amalfi Coast, exploring picturesque towns and coastal views.",
-    },
-    {
-      type: "Therapeutic",
-      title: "Hot Springs Retreat in Iceland",
-      description:
-        "Relax in geothermal hot springs surrounded by Iceland's otherworldly landscapes.",
-    },
-    {
-      type: "Religious",
-      title: "Journey to the Western Wall in Jerusalem",
-      description:
-        "Visit the Western Wall, one of the holiest sites in Judaism, in the heart of Jerusalem.",
-    },
-    {
-      type: "Studying",
-      title: "Literary Tour of Oxford",
-      description:
-        "Discover the literary history of Oxford, exploring the haunts of famous authors.",
-    },
-    {
-      type: "Tourism",
-      title: "Cruise the Norwegian Fjords",
-      description:
-        "Sail through the breathtaking fjords of Norway, surrounded by majestic landscapes.",
-    },
-    {
-      type: "Therapeutic",
-      title: "Meditation Retreat in Bali",
-      description:
-        "Reconnect with nature and inner peace through guided meditation in Bali.",
-    },
-    {
-      type: "Religious",
-      title: "Pilgrimage to Lourdes",
-      description:
-        "Experience the healing atmosphere of Lourdes, a significant Catholic pilgrimage site.",
-    },
-    {
-      type: "Studying",
-      title: "History and Culture in Kyoto",
-      description:
-        "Explore the traditional side of Japan with a focus on history and culture in Kyoto.",
-    },
-    {
-      type: "Tourism",
-      title: "Island Hopping in Greece",
-      description:
-        "Hop between the enchanting Greek islands, each with its own unique charm.",
-    },
-    {
-      type: "Therapeutic",
-      title: "Ayurvedic Retreat in Kerala",
-      description:
-        "Experience the healing traditions of Ayurveda in the serene landscapes of Kerala, India.",
-    },
-    {
-      type: "Religious",
-      title: "Camino de Santiago Pilgrimage",
-      description:
-        "Embark on the famous Camino de Santiago, a historic pilgrimage route in Spain.",
-    },
-    {
-      type: "Studying",
-      title: "Science Exploration in CERN",
-      description:
-        "Uncover the mysteries of particle physics with a visit to CERN in Geneva, Switzerland.",
-    },
-    {
-      type: "Tourism",
-      title: "Magical Adventure in Santorini",
-      description:
-        "Experience the charm of Santorini with its iconic white-washed buildings, breathtaking sunsets, and crystal-clear blue waters.",
-    },
-  ];
+  const [trips, setTrips] = useState([]);
+
+  // Function to fetch products
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/trips");
+        setTrips(response.data || []);
+      } catch (error) {
+        console.error("Failed to fetch Trips", error);
+      }
+    };
+    fetchTrips();
+  }, []);
+
+  // const trips = [
+  //   {
+  //     type: "Tourism",
+  //     title: "Discover the Wonders of Tokyo",
+  //     description:
+  //       "Experience the blend of traditional and modern in Japan's bustling capital.",
+  //   },
+  //   {
+  //     type: "Therapeutic",
+  //     title: "Wellness Retreat in the Maldives",
+  //     description:
+  //       "Recharge your mind and body surrounded by crystal-clear waters and white sandy beaches.",
+  //   },
+  //   {
+  //     type: "Religious",
+  //     title: "Sacred Pilgrimage to Mecca",
+  //     description:
+  //       "Embark on a spiritual journey to the holiest city in Islam.",
+  //   },
+  //   {
+  //     type: "Studying",
+  //     title: "Art and History Exploration in Florence",
+  //     description:
+  //       "Immerse yourself in the Renaissance art and architecture of Florence, Italy.",
+  //   },
+  //   {
+  //     type: "Tourism",
+  //     title: "Adventurous Safari in Serengeti National Park",
+  //     description:
+  //       "Witness the incredible wildlife of Africa on a thrilling safari adventure.",
+  //   },
+  //   {
+  //     type: "Therapeutic",
+  //     title: "Yoga Retreat in the Himalayas",
+  //     description:
+  //       "Find peace and tranquility surrounded by the majestic mountains of the Himalayas.",
+  //   },
+  //   {
+  //     type: "Religious",
+  //     title: "Cultural Experience in Varanasi",
+  //     description:
+  //       "Explore the spiritual and cultural richness of the holy city of Varanasi, India.",
+  //   },
+  //   {
+  //     type: "Studying",
+  //     title: "Archaeological Expedition to Athens",
+  //     description:
+  //       "Delve into the ancient history of Greece with a study tour in Athens.",
+  //   },
+  //   {
+  //     type: "Tourism",
+  //     title: "Scenic Road Trip along the Amalfi Coast",
+  //     description:
+  //       "Drive along the stunning Amalfi Coast, exploring picturesque towns and coastal views.",
+  //   },
+  //   {
+  //     type: "Therapeutic",
+  //     title: "Hot Springs Retreat in Iceland",
+  //     description:
+  //       "Relax in geothermal hot springs surrounded by Iceland's otherworldly landscapes.",
+  //   },
+  //   {
+  //     type: "Religious",
+  //     title: "Journey to the Western Wall in Jerusalem",
+  //     description:
+  //       "Visit the Western Wall, one of the holiest sites in Judaism, in the heart of Jerusalem.",
+  //   },
+  //   {
+  //     type: "Studying",
+  //     title: "Literary Tour of Oxford",
+  //     description:
+  //       "Discover the literary history of Oxford, exploring the haunts of famous authors.",
+  //   },
+  //   {
+  //     type: "Tourism",
+  //     title: "Cruise the Norwegian Fjords",
+  //     description:
+  //       "Sail through the breathtaking fjords of Norway, surrounded by majestic landscapes.",
+  //   },
+  //   {
+  //     type: "Therapeutic",
+  //     title: "Meditation Retreat in Bali",
+  //     description:
+  //       "Reconnect with nature and inner peace through guided meditation in Bali.",
+  //   },
+  //   {
+  //     type: "Religious",
+  //     title: "Pilgrimage to Lourdes",
+  //     description:
+  //       "Experience the healing atmosphere of Lourdes, a significant Catholic pilgrimage site.",
+  //   },
+  //   {
+  //     type: "Studying",
+  //     title: "History and Culture in Kyoto",
+  //     description:
+  //       "Explore the traditional side of Japan with a focus on history and culture in Kyoto.",
+  //   },
+  //   {
+  //     type: "Tourism",
+  //     title: "Island Hopping in Greece",
+  //     description:
+  //       "Hop between the enchanting Greek islands, each with its own unique charm.",
+  //   },
+  //   {
+  //     type: "Therapeutic",
+  //     title: "Ayurvedic Retreat in Kerala",
+  //     description:
+  //       "Experience the healing traditions of Ayurveda in the serene landscapes of Kerala, India.",
+  //   },
+  //   {
+  //     type: "Religious",
+  //     title: "Camino de Santiago Pilgrimage",
+  //     description:
+  //       "Embark on the famous Camino de Santiago, a historic pilgrimage route in Spain.",
+  //   },
+  //   {
+  //     type: "Studying",
+  //     title: "Science Exploration in CERN",
+  //     description:
+  //       "Uncover the mysteries of particle physics with a visit to CERN in Geneva, Switzerland.",
+  //   },
+  //   {
+  //     type: "Tourism",
+  //     title: "Magical Adventure in Santorini",
+  //     description:
+  //       "Experience the charm of Santorini with its iconic white-washed buildings, breathtaking sunsets, and crystal-clear blue waters.",
+  //   },
+  // ];
 
   const tripTypes = ["Tourism", "Therapeutic", "Religious", "Studying"];
 
@@ -230,9 +247,6 @@ const Feed = () => {
         </form>
       </div>
 
-
-
-
       <h2 className="section-title">Companies</h2>
       <div className="companies-container">
         {/* Company 1 */}
@@ -290,19 +304,23 @@ const Feed = () => {
         </div>
       </div>
 
-      
       <h2 className="section-title">Trips</h2>
       <div className="trips-container">
         {trips.map((trip, index) => (
-          <div key={index} className="trip-card">
-            <img src={getRandomImage()} alt={`Trip ${index + 1}`} />
-            <h2>{trip.type} Trip</h2>
-            <p>{trip.title}</p>
-            <p>{trip.description}</p>
-          </div>
+          <Link to={`/trip/${trip.id}`} key={trip.id} className="trip-card">
+            <div className="image">
+              <img src={getRandomImage()} alt={`Trip ${index + 1}`} />
+            </div>
+            <div className="text">
+              <div className="titles">
+                <h2>{trip.type} Trip</h2>
+                <h3>{trip.name}</h3>
+              </div>
+              <p className="price-label">{trip.price}$</p>
+            </div>
+          </Link>
         ))}
       </div>
-
 
       <h2 className="section-title">Trending cities</h2>
       <div className="cities-container">
