@@ -28,23 +28,21 @@ const Safra = () => {
 
   console.log(safraDescription);
 
+  const formData = {
+    safraName,
+    safraType,
+    safraDescription,
+    dateFrom: new Date(dateFrom),
+    dateTo: new Date(dateTo),
+    timeStart,
+    timeEnd,
+    safraPrice,
+    safraProgramme,
+    offer,
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = {
-      safraName,
-      safraType,
-      safraDescription,
-      dateFrom: new Date(dateFrom),
-      dateTo: new Date(dateTo),
-      timeStart,
-      timeEnd,
-      safraPrice,
-      safraProgramme,
-      offer,
-    };
-
-    console.log(new Date(dateFrom).getFullYear());
 
     try {
       const response = await axios.post("http://localhost:3001/createTrip", {
@@ -73,6 +71,10 @@ const Safra = () => {
       // Handle error scenario
     }
   };
+
+  console.log("THis is the date 1: ", new Date(dateFrom));
+  console.log("THis is the date 2: ", dateTo);
+  console.log("THis is the form date: ", formData )
 
   return (
     <div className="body-content">
