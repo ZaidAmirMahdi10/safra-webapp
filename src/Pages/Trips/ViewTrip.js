@@ -2,17 +2,55 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./ViewTrip.css";
-import { Card, CardContent, Container, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import SafrasLocation from "../../components/Location";
+import { useAuth } from "../../hooks/useAuth";
+import Modal from "../../components/ui/Modal";
+import classes from "../../components/ui/Modal.module.css";
 
 export default function ViewTrip() {
   const { id } = useParams();
+  const { user } = useAuth();
 
-  const [userType, setUserType] = useState("customer");
-
-  const [showPopup, setShowPopup] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [pageTwo, setPageTwo] = useState({ active: false, customer: "" });
 
   const [trip, setTrip] = useState([]);
+  console.log(user);
+
+  const [allUsers, setAllUsers] = useState({
+    customer: [],
+    company: [],
+    admin: [],
+  });
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/users");
+        setAllUsers(response.data || { customer: [], company: [], admin: [] });
+      } catch (error) {
+        console.error("Failed to fetch users", error);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
+
+  useEffect(() => {
+    const filtered = allUsers.customer.filter((customer) =>
+      customer.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCustomers(filtered);
+  }, [searchTerm, allUsers.customer]);
 
   const {
     name,
@@ -48,8 +86,82 @@ export default function ViewTrip() {
   }
 
   function handleBookButton() {
-    setShowPopup(true);
+    setShowModal(true);
   }
+
+  // Popup TYPES
+  // [1] Customer
+  const customerModal = () => {
+    return (
+      <>
+        <h3>Choose an option</h3>
+        <div className={classes.buttons}>
+          <Link to="/book" className={classes.button}>
+            Continue as a guest
+          </Link>
+          <Link
+            to={{
+              pathname: "/register",
+            }}
+            state={{ userType: "customer", tripId: id }}
+            className={classes.button}
+          >
+            Register account
+          </Link>
+        </div>
+      </>
+    );
+  };
+
+  // [2] Company
+  const companyModal = () => {
+    return (
+      <>
+        <h3 className={classes.popupTitle}>Passengers</h3>
+        <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          fullWidth
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <div className={classes.customerList}>
+          {filteredCustomers.map((customer) => {
+            return (
+              <div
+                key={customer.id}
+                className={classes.customer}
+                onClick={() =>
+                  setPageTwo({
+                    active: true,
+                    customer: customer,
+                  })
+                }
+              >
+                <span>
+                  {customer.username.length > 28
+                    ? `${customer.username.slice(0, 28)}...`
+                    : customer.username}
+                </span>
+                <button className={classes.detailsButton}>Show</button>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  };
+
+  // [3] Company Page 2
+  const pageTwoModal = () => {
+    return (
+      <>
+        <p>{pageTwo.customer.id}</p>
+        <h3 className={classes.popupTitle}>{pageTwo.customer.username}</h3>
+        <p>{pageTwo.customer.email}</p>
+      </>
+    );
+  };
 
   return (
     <div className="trip-page">
@@ -78,7 +190,7 @@ export default function ViewTrip() {
                     journey of self-discovery, cultural immersion, and expanding
                     horizons.
                   </Typography>
-                  {userType === "customer" ? (
+                  {user.userType === "customer" ? (
                     <div className="book-button-container">
                       <button
                         className="book-button"
@@ -135,42 +247,23 @@ export default function ViewTrip() {
             </section>
 
             <button className="book-button centered" onClick={handleBookButton}>
-              {userType === "customer" ? "Book" : "View passengers"}
+              {user.userType === "customer" ? "Book" : "View Passengers"}
             </button>
           </div>
         </section>
       </Container>
-      {showPopup && (
-        <div className="popup-container">
-          <div className="overlay" onClick={() => setShowPopup(false)}></div>
-          <div className="popup">
-            <section className="popup-header">
-              <img
-                src="/assets/img/trip/close.svg"
-                className="close-icon"
-                alt="close popup"
-                onClick={() => setShowPopup(false)}
-              />
-            </section>
-            <section className="popup-body">
-              <h3>Choose an option</h3>
-              <div className="buttons">
-                <Link to="/book" className="button">
-                  Continue as a guest
-                </Link>
-                <Link
-                  to={{
-                    pathname: "/register",
-                  }}
-                  state={{ userType: "customer", tripId: id }}
-                  className="button"
-                >
-                  Register account
-                </Link>
-              </div>
-            </section>
-          </div>
-        </div>
+      {showModal && (
+        <Modal
+          toggleModal={setShowModal}
+          pageTwo={pageTwo}
+          setPageTwo={setPageTwo}
+        >
+          {user.userType === "customer"
+            ? customerModal()
+            : pageTwo.active
+            ? pageTwoModal()
+            : companyModal()}
+        </Modal>
       )}
     </div>
   );
