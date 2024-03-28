@@ -1,0 +1,84 @@
+.booking-trip {
+  padding: 20px 0;
+}
+
+.booking-trip .container {
+  max-width: 800px;
+}
+
+.booking-trip .input-container {
+  margin: 20px 0;
+}
+
+.booking-trip .input-container label {
+  margin-bottom: 5px;
+}
+
+.booking-trip .text-input {
+  width: 100%;
+}
+
+.booking-trip .radio-buttons {
+  display: flex;
+}
+
+.booking-trip .radio-buttons .button {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 20px;
+}
+
+.booking-trip .radio-buttons input {
+  display: none;
+}
+
+.booking-trip .radio-buttons label {
+  border: 2px solid #ccc;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 10px 10px 10px 30px;
+}
+
+.booking-trip .radio-buttons label::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  transition: transform 0.2s;
+}
+
+.booking-trip input[type="radio"]:checked + label::after {
+  background-color: blueviolet;
+}
+
+.booking-trip .date-select-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.booking-trip select {
+  padding: 16.5px 14px;
+  width: 100%;
+  max-width: unset;
+}
+
+.booking-trip .book-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.booking-trip .book-button {
+  margin: 20px 0;
+  width: 120px;
+  border-radius: 4px;
+  background-image: var(--main-gradient);
+}

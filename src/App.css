@@ -6,6 +6,10 @@ button {
   /* padding-bottom: 20px; */
 }
 
+:root {
+  --main-gradient: linear-gradient(135deg, #de1666 0%, #73146f 100%);
+}
+
 .App {
   text-align: center;
 }

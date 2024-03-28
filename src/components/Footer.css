@@ -65,10 +65,10 @@
 }
 
 #footer .footer-top {
-    padding: 60px 0 30px 0;
-    background: #210340;
-    border-bottom: 1px solid;
-    color: #fff;
+  padding: 60px 0 30px 0;
+  background: #210340;
+  border-bottom: 1px solid;
+  color: #fff;
 }
 
 #footer .footer-top .footer-contact {
@@ -109,7 +109,7 @@
   margin: 0;
 }
 
-#footer .footer-top .footer-links ul i {
+#footer .footer-top .footer-links .icon {
   padding-right: 2px;
   color: #dca54a;
   font-size: 18px;
@@ -181,28 +181,28 @@
 }
 
 .newsletter-input {
-    margin: -10px;
+  margin: -10px;
 }
 
 .newsletter-buttom {
-    position: absolute;
-    top: -10px !important;
-    right: -10px !important;
-    bottom: -10px !important;
-    width: 130px !important;
-    border: 0;
-    background: none;
-    font-size: 16px;
-    padding: 0 20px;
-    background: #dca54a;
-    color: #fff;
-    transition: 0.3s;
-    border-radius: 0 4px 4px 0;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -10px !important;
+  right: -10px !important;
+  bottom: -10px !important;
+  width: 130px !important;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #dca54a;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .newsletter-holder {
-  border: 1px solid rgba(167,98,234,0.4);
+  border: 1px solid rgba(167, 98, 234, 0.4);
   border-radius: 8px;
   padding: 24px;
 }

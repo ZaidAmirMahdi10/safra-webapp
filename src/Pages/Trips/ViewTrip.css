@@ -1,0 +1,235 @@
+.trip-page {
+  background-color: #130026;
+  color: #fff;
+}
+
+.main-trip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (min-width: 992px) {
+    gap: 0;
+  }
+}
+
+.main-trip-content .row-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+
+  @media (min-width: 992px) {
+    grid-template-columns: 8fr 4fr;
+  }
+}
+
+.main-trip-content .row-2 {
+  padding-bottom: 60px;
+}
+
+.main-trip-content .image img {
+  border-radius: 4px;
+}
+
+.main-trip-content .cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 992px) {
+    flex-direction: column;
+  }
+}
+
+.main-trip-content .card {
+  border: transparent;
+  position: relative;
+  flex: 1;
+  max-width: 500px;
+
+  @media (min-width: 576px) {
+    min-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    min-width: unset;
+    margin: 0;
+  }
+}
+
+.main-trip-content .card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ribbon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.ribbon {
+  position: absolute;
+  top: 30px;
+  right: -50px;
+  width: 200px;
+  background-image: var(--main-gradient);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 4px 16px;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.main-trip-content .card .card-title {
+  font-family: CeraPro-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
+.main-trip-content .card .date {
+  font-size: 14px;
+}
+
+.main-trip-content .card .row-elements {
+  display: flex;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.main-trip-content .partition-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-trip-content .partition-title h4 {
+  font-family: CeraPro-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.main-trip-content .partition-title a {
+  color: #007eb0;
+}
+
+.main-trip-content .book-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-trip-content .book-button {
+  margin: 0 0 20px 0;
+  min-width: 120px;
+  border-radius: 4px;
+  background-image: var(--main-gradient);
+}
+
+.main-trip-content .book-button.centered {
+  margin: 0 auto 20px;
+}
+
+.main-trip-content .trip-details h3 {
+  font-size: 28px;
+}
+
+.main-trip-content .trip-details h4 {
+  font-size: 22px;
+}
+
+.main-trip-content .trip-details p {
+  font-size: 14px;
+  text-align: justify;
+}
+
+/* Popup styles */
+
+.popup-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.popup-container .overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(111, 111, 111, 0.5);
+  z-index: 401;
+}
+
+.popup-container .popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 402;
+}
+
+.popup .close-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  width: 14px;
+  cursor: pointer;
+}
+
+.popup .popup-body {
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.popup h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.popup .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.popup .button {
+  border-radius: 4px;
+  margin: 0;
+  background-image: var(--main-gradient);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.popup button:hover {
+  background-color: #5f00be !important;
+}

@@ -57,18 +57,18 @@ const Dashboard = () => {
     };
 
     // Function to fetch products
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/products");
-        setProducts(response.data || []);
-      } catch (error) {
-        console.error("Failed to fetch products", error);
-      }
-    };
+    // const fetchProducts = async () => {
+    //   try {
+    //     const response = await axios.get("http://localhost:3001/products");
+    //     setProducts(response.data || []);
+    //   } catch (error) {
+    //     console.error("Failed to fetch products", error);
+    //   }
+    // };
 
     fetchUsers();
     fetchAllCompanies();
-    fetchProducts();
+    // fetchProducts();
   }, []);
 
   const handleToggle = (type) => {
