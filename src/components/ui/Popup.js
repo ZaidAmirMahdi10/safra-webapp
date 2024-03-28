@@ -13,7 +13,7 @@ export default function Popup({ togglePopup, userType, tripId }) {
   const [filteredCustomers, setFilteredCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [pageTwo, setPageTwo] = useState({ active: false, customerName: "" });
+  const [pageTwo, setPageTwo] = useState({ active: false, customer: "" });
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -35,7 +35,7 @@ export default function Popup({ togglePopup, userType, tripId }) {
     setFilteredCustomers(filtered);
   }, [searchTerm, allUsers.customer]);
 
-  console.log(allUsers);
+  // console.log(allUsers);
 
   // Popup TYPES
   const customerPopup = () => {
@@ -80,7 +80,7 @@ export default function Popup({ togglePopup, userType, tripId }) {
                 onClick={() =>
                   setPageTwo({
                     active: true,
-                    customerName: customer.username,
+                    customer: customer,
                   })
                 }
               >
@@ -89,7 +89,7 @@ export default function Popup({ togglePopup, userType, tripId }) {
                     ? `${customer.username.slice(0, 28)}...`
                     : customer.username}
                 </span>
-                <button className={classes.button}>show</button>
+                <button className={classes.detailsButton}>show</button>
               </div>
             );
           })}
@@ -101,7 +101,9 @@ export default function Popup({ togglePopup, userType, tripId }) {
   const pageTwoPopup = () => {
     return (
       <>
-        <h3 className={classes.popupTitle}>{pageTwo.customerName}</h3>
+        <p>{pageTwo.customer.id}</p>
+        <h3 className={classes.popupTitle}>{pageTwo.customer.username}</h3>
+        <p>{pageTwo.customer.email}</p>
       </>
     );
   };
@@ -111,11 +113,18 @@ export default function Popup({ togglePopup, userType, tripId }) {
       <div className={classes.overlay} onClick={() => togglePopup(false)}></div>
       <div className={classes.popup}>
         <section className={classes.popupHeader}>
-          {pageTwo.active ? <img src="testing" alt="BACK" /> : null}
+          {pageTwo.active ? (
+            <img
+              src="/assets/img/trip/arrow-left.svg"
+              alt="back to customers"
+              className={classes.backIcon}
+              onClick={() => setPageTwo(false)}
+            />
+          ) : null}
           <img
             src="/assets/img/trip/close.svg"
-            className={classes.closeIcon}
             alt="close popup"
+            className={classes.closeIcon}
             onClick={() => togglePopup(false)}
           />
         </section>

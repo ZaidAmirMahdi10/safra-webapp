@@ -43,7 +43,6 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  margin: 0;
   width: 14px;
   cursor: pointer;
 }
@@ -87,10 +86,6 @@
   text-align: center;
 }
 
-.popup button:hover {
-  background-color: #5f00be !important;
-}
-
 .popupTitle {
   font-size: 22px;
   margin-bottom: 0;
@@ -115,5 +110,19 @@
 }
 
 .customer:hover {
-  background-color: #ddd;
+  background-color: #ebebebbd;
+}
+
+.detailsButton {
+  background-color: #929292 !important;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.backIcon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 14px;
+  cursor: pointer;
 }

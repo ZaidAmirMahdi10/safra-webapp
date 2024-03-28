@@ -5,15 +5,17 @@ import "./ViewTrip.css";
 import { Card, CardContent, Container, Typography } from "@mui/material";
 import SafrasLocation from "../../components/Location";
 import Popup from "../../components/ui/Popup";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ViewTrip() {
   const { id } = useParams();
-
-  const [userType, setUserType] = useState("customer and admin");
+  const { user } = useAuth();
+  // const [userType, setUserType] = useState("customer");
 
   const [showPopup, setShowPopup] = useState(false);
 
   const [trip, setTrip] = useState([]);
+  console.log(user);
 
   const {
     name,
@@ -79,7 +81,7 @@ export default function ViewTrip() {
                     journey of self-discovery, cultural immersion, and expanding
                     horizons.
                   </Typography>
-                  {userType === "customer" ? (
+                  {user.userType === "customer" ? (
                     <div className="book-button-container">
                       <button
                         className="book-button"
@@ -136,13 +138,17 @@ export default function ViewTrip() {
             </section>
 
             <button className="book-button centered" onClick={handleBookButton}>
-              {userType === "customer" ? "Book" : "View Customers"}
+              {user.userType === "customer" ? "Book" : "View Customers"}
             </button>
           </div>
         </section>
       </Container>
       {showPopup && (
-        <Popup togglePopup={setShowPopup} userType={userType} tripId={id} />
+        <Popup
+          togglePopup={setShowPopup}
+          userType={user.userType}
+          tripId={id}
+        />
       )}
     </div>
   );
