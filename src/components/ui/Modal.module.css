@@ -64,7 +64,8 @@
 }
 
 .popupBody::-webkit-scrollbar-thumb {
-  background: var(--main-gradient);
+  background: var(--main-purple-color);
+  border-radius: 6px;
 }
 
 .buttons {
@@ -96,7 +97,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
 }
 
 .customer {
@@ -117,6 +117,7 @@
   background-color: #929292 !important;
   padding: 4px 8px;
   border-radius: 4px;
+  margin: 0;
 }
 
 .backIcon {

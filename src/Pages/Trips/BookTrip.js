@@ -9,6 +9,8 @@ import {
 import { useEffect, useState } from "react";
 
 import "./BookTrip.css";
+import axios from "axios";
+import { Navigate } from "react-router";
 
 export default function BookTrip() {
   const [formData, setFormData] = useState({
@@ -81,6 +83,22 @@ export default function BookTrip() {
 
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
+
+  console.log(formData);
+
+  const handleBook = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3001/passenger", {
+        formData,
+      });
+      console.log("Registration successful", response.data);
+      Navigate("/feed");
+    } catch (error) {
+      console.error("Registration failed", error);
+    }
+  };
 
   return (
     <section className="booking-trip">
@@ -207,7 +225,9 @@ export default function BookTrip() {
             </select>
           </div>
           <div className="book-button-container">
-            <button className="book-button">Book</button>
+            <button className="book-button" onClick={handleBook}>
+              Book
+            </button>
           </div>
         </form>
       </Container>
