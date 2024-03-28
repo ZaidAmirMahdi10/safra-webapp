@@ -30,7 +30,6 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("username", username);
       localStorage.setItem("email", userMail);
       localStorage.setItem("userType", userType);
-
       console.log("Login successful", response.data);
       setIsAuthenticated(true);
 
