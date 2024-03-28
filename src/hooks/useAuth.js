@@ -15,10 +15,12 @@ const useProvideAuth = () => {
     const storedToken = localStorage.getItem('token');
     const storedUserId = localStorage.getItem('userId');
     const storedUsername = localStorage.getItem('username');
+    const storedUserType = localStorage.getItem("userType");
+
 
     return storedToken && storedUserId
-      ? { token: storedToken, userId: storedUserId, username: storedUsername }
-      : null;
+    ? { token: storedToken, userId: storedUserId, username: storedUsername, userType: storedUserType }
+    : null;
   });
 
   const signIn = (token, userId, username) => {
@@ -28,17 +30,11 @@ const useProvideAuth = () => {
     localStorage.setItem('username', username);
   };
 
-  const signOut = () => {
-    setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('username');
-  };
+ 
 
   return {
     user,
     signIn,
-    signOut,
   };
 };
 
