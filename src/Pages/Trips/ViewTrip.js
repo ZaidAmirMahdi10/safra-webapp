@@ -4,11 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import "./ViewTrip.css";
 import { Card, CardContent, Container, Typography } from "@mui/material";
 import SafrasLocation from "../../components/Location";
+import Popup from "../../components/ui/Popup";
 
 export default function ViewTrip() {
   const { id } = useParams();
 
-  const [userType, setUserType] = useState("customer");
+  const [userType, setUserType] = useState("customer and admin");
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -135,42 +136,13 @@ export default function ViewTrip() {
             </section>
 
             <button className="book-button centered" onClick={handleBookButton}>
-              {userType === "customer" ? "Book" : "View passengers"}
+              {userType === "customer" ? "Book" : "View Customers"}
             </button>
           </div>
         </section>
       </Container>
       {showPopup && (
-        <div className="popup-container">
-          <div className="overlay" onClick={() => setShowPopup(false)}></div>
-          <div className="popup">
-            <section className="popup-header">
-              <img
-                src="/assets/img/trip/close.svg"
-                className="close-icon"
-                alt="close popup"
-                onClick={() => setShowPopup(false)}
-              />
-            </section>
-            <section className="popup-body">
-              <h3>Choose an option</h3>
-              <div className="buttons">
-                <Link to="/book" className="button">
-                  Continue as a guest
-                </Link>
-                <Link
-                  to={{
-                    pathname: "/register",
-                  }}
-                  state={{ userType: "customer", tripId: id }}
-                  className="button"
-                >
-                  Register account
-                </Link>
-              </div>
-            </section>
-          </div>
-        </div>
+        <Popup togglePopup={setShowPopup} userType={userType} tripId={id} />
       )}
     </div>
   );

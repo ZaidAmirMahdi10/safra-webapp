@@ -7,6 +7,7 @@ button {
 }
 
 :root {
+  --main-purple-color: #210340;
   --main-gradient: linear-gradient(135deg, #de1666 0%, #73146f 100%);
 }
 
