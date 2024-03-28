@@ -11,11 +11,14 @@ import {
   FormControl,
 } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 
 import classes from "./Register.module.css";
 
 const Register = () => {
+  const userFromTrip = useLocation();
+  console.log(userFromTrip.state?.userType);
+
   const [userType, setUserType] = useState("admin");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +27,7 @@ const Register = () => {
   const [location, setLocation] = useState("");
   const [logo, setLogo] = useState(null);
   const [companyDocs, setCompanyDocs] = useState(null);
+
   const navigate = useNavigate();
 
   function handleLogo(event) {

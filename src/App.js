@@ -17,7 +17,8 @@ import Feed from "./components/Feed";
 import { ProvideAuth } from "./hooks/useAuth";
 import Location from "./components/Location";
 import Footer from "./components/Footer";
-import Trip from "./components/Trip";
+import ViewTrip from "./Pages/Trips/ViewTrip";
+import BookTrip from "./Pages/Trips/BookTrip";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,7 +49,8 @@ function App() {
             path="/logout"
             element={<Logout setIsAuthenticated={setIsAuthenticated} />}
           />
-          <Route path="/trip/:id" element={<Trip />} />
+          <Route path="/trip/:id" element={<ViewTrip />} />
+          <Route path="/book" element={<BookTrip />} />
         </Routes>
 
         <Footer />

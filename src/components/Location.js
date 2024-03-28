@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet"; // Import Leaflet library
 import "leaflet/dist/leaflet.css";
+import "./Location.css";
 
 const SafrasLocation = () => {
-  const [position, setPosition] = useState([0, 0]);
+  const [position, setPosition] = useState([33.3535731, 44.3579943]);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -17,6 +18,8 @@ const SafrasLocation = () => {
         });
 
         const { latitude, longitude } = geoPosition.coords;
+        console.log(latitude);
+        console.log(longitude);
         setPosition([latitude, longitude]);
       } catch (error) {
         console.error("Error getting current position:", error);
@@ -29,16 +32,19 @@ const SafrasLocation = () => {
   const handleMapMove = () => {
     if (mapRef.current) {
       const center = mapRef.current.getCenter();
+      console.log(center);
       setPosition([center.lat, center.lng]);
     }
   };
 
   const customMarkerIcon = new L.Icon({
-    iconUrl: "path/to/custom-marker-icon.png",
+    iconUrl: "/assets/img/trip/map-pin-solid.svg",
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
   });
+
+  console.log(customMarkerIcon.options.iconUrl);
 
   return (
     <div className="body-content">
@@ -57,8 +63,9 @@ const SafrasLocation = () => {
         />
         {position[0] !== 0 && (
           <Marker
+            style={{ width: "10px", height: "10px" }}
             position={position}
-            icon={L.icon({ iconUrl: "/path/to/custom-marker-icon.png" })}
+            icon={L.icon({ iconUrl: customMarkerIcon.options.iconUrl })}
           >
             <Popup>Your current position</Popup>
           </Marker>

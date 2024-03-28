@@ -1,0 +1,18 @@
+.create-safra .select-box {
+  border-radius: 4px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.create-safra .textarea {
+  border-radius: 4px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  resize: none;
+}
+
+.create-safra .add-day-button {
+  background-color: green !important;
+  width: fit-content;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: 0;
+}
